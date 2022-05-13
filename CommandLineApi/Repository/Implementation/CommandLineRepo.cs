@@ -29,6 +29,7 @@ namespace CommandLineApi.Repository
                     OS             = "all"
                 }
             };
+            return commands;
         }
 
         public Command GetCommandById(int Id)
