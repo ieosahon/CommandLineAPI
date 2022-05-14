@@ -6,7 +6,11 @@
 
   <ItemGroup>
     <Folder Include="Context\" />
-    <Folder Include="Repository\" />
+    <Folder Include="ModelValidationUtility\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLineApi.Core\CommandLineApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

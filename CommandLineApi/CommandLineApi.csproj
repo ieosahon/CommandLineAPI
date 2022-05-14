@@ -13,4 +13,8 @@
     <Folder Include="Extensions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLineApi.Infrastructure\CommandLineApi.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
