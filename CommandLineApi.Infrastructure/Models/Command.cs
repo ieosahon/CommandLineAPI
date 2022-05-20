@@ -8,7 +8,7 @@ namespace CommandLineApi.Infrastructure.Models
 {
     public class Command
     {
-        public int CommandId { get; set; }
+        public string CommandId { get; set; }
         public string CommandName { get; set; }
         public string CommandSnippet { get; set; }
         public string TargetEnvironment { get; set; }
