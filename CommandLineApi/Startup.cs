@@ -29,6 +29,7 @@ namespace CommandLineApi
         {
             // injecting the db connection string
             services.DbContextConfiguration(Configuration);
+            services.CorsConfiguration();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -48,6 +49,8 @@ namespace CommandLineApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
