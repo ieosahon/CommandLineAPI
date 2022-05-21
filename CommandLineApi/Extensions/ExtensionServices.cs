@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using FluentValidation.AspNetCore;
+using CommandLineApi.Infrastructure.ModelValidationUtility;
 
 namespace CommandLineApi.Extensions
 {
@@ -19,5 +21,10 @@ namespace CommandLineApi.Extensions
             );
             });
 
+        public static void AddControllerConfiguration(this IServiceCollection service) => service.AddControllers().AddFluentValidation(fv =>
+        {
+            //fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+            fv.RegisterValidatorsFromAssemblyContaining<CommandItemValidator>();
+        });
     }
 }

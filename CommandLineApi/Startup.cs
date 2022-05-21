@@ -31,7 +31,8 @@ namespace CommandLineApi
             services.DbContextConfiguration(Configuration);
             services.CorsConfiguration();
 
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllerConfiguration();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandLineApi", Version = "v1" });
