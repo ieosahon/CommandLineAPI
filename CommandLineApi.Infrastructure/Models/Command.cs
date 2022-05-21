@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommandLineApi.Infrastructure.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace CommandLineApi.Infrastructure.Models
 {
     public class Command
     {
+        [CustomValidation]
         public string CommandId { get; set; }
         public string CommandName { get; set; }
         public string CommandSnippet { get; set; }
