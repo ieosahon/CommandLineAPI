@@ -1,4 +1,5 @@
 using CommandLineApi.Extensions;
+using CommandLineApi.Infrastructure.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -61,6 +62,8 @@ namespace CommandLineApi
             {
                 endpoints.MapControllers();
             });
+
+            SeedData.Seed(app);
         }
     }
 }
