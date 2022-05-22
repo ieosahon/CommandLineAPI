@@ -34,10 +34,12 @@ namespace CommandLineApi
 
             //services.AddControllers();
             services.AddControllerConfiguration();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandLineApi", Version = "v1" });
-            });
+
+            services.SwaggerConfiguration();
+            /* services.AddSwaggerGen(c =>
+             {
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandLineApi", Version = "v1" });
+             });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +48,16 @@ namespace CommandLineApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CommandLineApi v1"));
+
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CommandLineApi v1");
+                //c.RoutePrefix = String.Empty;
+            });
 
             app.UseHttpsRedirection();
 
