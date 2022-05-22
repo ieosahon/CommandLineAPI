@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using FluentValidation.AspNetCore;
 using CommandLineApi.Infrastructure.ModelValidationUtility;
+using Microsoft.OpenApi.Models;
 
 namespace CommandLineApi.Extensions
 {
@@ -26,5 +27,27 @@ namespace CommandLineApi.Extensions
             //fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
             fv.RegisterValidatorsFromAssemblyContaining<CommandItemValidator>();
         });
+
+        public static void SwaggerConfiguration(this IServiceCollection service)
+        {
+            service.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CommandLineApi",
+                    Description = "Command Line API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Osahon Ighodaro",
+                        Email = "ieosahon@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Osahon open License"
+                    }
+                });
+            });
+        }
     }
 }
