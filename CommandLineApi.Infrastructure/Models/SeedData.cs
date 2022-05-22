@@ -44,7 +44,7 @@ namespace CommandLineApi.Infrastructure.Models
                     TargetEnvironment = "Entity Framework Core",
                     OS = "All"
                 });
-
+                context.SaveChanges();
             }
         }
     }
