@@ -8,5 +8,9 @@ namespace CommandLineApi.Core.DTO
 {
     public class CommandRequestDto
     {
+        public string CommandName { get; set; }
+        public string CommandSnippet { get; set; }
+        public string TargetEnvironment { get; set; }
+        public string OS { get; set; }
     }
 }
