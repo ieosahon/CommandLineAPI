@@ -29,5 +29,10 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
         {
             return await _dbSet.FirstAsync();
         }
+
+        public async Task<T> GetCommandByName(string Name)
+        {
+            return await _dbSet.FirstAsync();
+        }
     }
 }

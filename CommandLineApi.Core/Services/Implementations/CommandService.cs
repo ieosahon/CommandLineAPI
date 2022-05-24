@@ -23,9 +23,21 @@ namespace CommandLineApi.Core.Services.Implementations
             _genericCommandLineRepo = genericCommandLineRepo;
             _mapper = mapper;
         }
-        public Task<Response<CommandResponseDto>> GetAllCommandAsync()
+        public async Task<Response<IEnumerable<CommandResponseDto>>> GetAllCommandAsync()
         {
-            throw new NotImplementedException();
+            var commands = await _genericCommandLineRepo.GetAllCommand();
+            if (commands != null)
+            {
+                var response = _mapper.Map<IEnumerable<CommandResponseDto>>(commands);
+                return new Response<IEnumerable<CommandResponseDto>>
+                {
+                    Data = response
+                };
+            }
+            return new Response<IEnumerable<CommandResponseDto>>();
+
+
+
         }
 
         public async Task<Response<CommandResponseDto>> GetCommandByIdAsync(string commandId)
@@ -46,9 +58,20 @@ namespace CommandLineApi.Core.Services.Implementations
 
         }
 
-        public Task<Response<CommandResponseDto>> GetCommandByNameAsync(string commandName)
+        public async Task<Response<CommandResponseDto>> GetCommandByNameAsync(string commandName)
         {
-            throw new NotImplementedException();
+            var command = await _genericCommandLineRepo.GetCommandByName(commandName);
+            if (command == null)
+            {
+                throw new ArgumentException($"Command with {commandName} is not found");
+            }
+            var response = _mapper.Map<CommandResponseDto>(command);
+            return new Response<CommandResponseDto>
+            {
+                Data = response,
+                IsSuccess = true,
+                Message = "Request is successful"
+            };
         }
     }
 }
