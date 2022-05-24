@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace CommandLineApi.Infrastructure.Repository.Interface
 {
-    public interface ICommandLine
+    public interface IGenericCommandLineRepo<T> where T : class
     {
-        Command GetCommandById(int Id);
+        Task<T> GetCommandById(string Id);
+        Task<T> GetCommandByName(string Name);
 
-        IEnumerable<Command> GetAllCommand();
+        Task<IEnumerable<T>> GetAllCommand();
     }
 }
