@@ -1,5 +1,10 @@
+using CommandLineApi.Core.Profiles;
+using CommandLineApi.Core.Services.Implementations;
+using CommandLineApi.Core.Services.Interfaces;
 using CommandLineApi.Extensions;
 using CommandLineApi.Infrastructure.Models;
+using CommandLineApi.Infrastructure.Repository.Implementation;
+using CommandLineApi.Infrastructure.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +41,12 @@ namespace CommandLineApi
             services.AddControllerConfiguration();
 
             services.SwaggerConfiguration();
+
+            services.AddScoped<ICommandService, CommandService>();
+
+            services.AddScoped(typeof(IGenericCommandLineRepo<>), typeof(GenericCommandLineRepo<>));
+
+            services.AddAutoMapper(typeof(CommandLineProfile));
             /* services.AddSwaggerGen(c =>
              {
                  c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandLineApi", Version = "v1" });

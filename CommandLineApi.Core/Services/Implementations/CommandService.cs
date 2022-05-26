@@ -68,9 +68,7 @@ namespace CommandLineApi.Core.Services.Implementations
             var response = _mapper.Map<CommandResponseDto>(command);
             return new Response<CommandResponseDto>
             {
-                Data = response,
-                IsSuccess = true,
-                Message = "Request is successful"
+                Data = response              
             };
         }
     }
