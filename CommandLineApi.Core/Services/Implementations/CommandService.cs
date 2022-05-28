@@ -51,8 +51,7 @@ namespace CommandLineApi.Core.Services.Implementations
             return new Response<CommandResponseDto>
             {
                 Data = response,
-                IsSuccess = true,
-                Message = "Request is successful"
+               
 
             };
 

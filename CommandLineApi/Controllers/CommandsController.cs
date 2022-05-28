@@ -43,5 +43,31 @@ namespace CommandLineApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occured we are working on it");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCommandAsync(string name)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var res = await _commandService.GetAllCommandAsync();
+                if (res == null)
+                {
+                    return NotFound();
+                }
+                return Ok(res);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured we are working on it");
+            }
+        }
     }
 }
