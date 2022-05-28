@@ -45,7 +45,7 @@ namespace CommandLineApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCommandAsync(string name)
+        public async Task<IActionResult> GetAllCommandAsync()
         {
             try
             {
