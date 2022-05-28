@@ -13,10 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\CommandLineApi.Core\CommandLineApi.Core.csproj" />
     <ProjectReference Include="..\CommandLineApi.Infrastructure\CommandLineApi.Infrastructure.csproj" />
   </ItemGroup>
 
