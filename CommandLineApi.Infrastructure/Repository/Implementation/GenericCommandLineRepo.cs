@@ -27,12 +27,12 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
 
         public async Task<T> GetCommandById(string Id)
         {
-            return await _dbSet.FirstAsync();
+            return await _dbSet.FindAsync(Id);
         }
 
         public async Task<T> GetCommandByName(string Name)
         {
-            return await _dbSet.FirstAsync();
+            return await _dbSet.FindAsync(Name);
         }
     }
 }

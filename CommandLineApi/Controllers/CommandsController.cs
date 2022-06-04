@@ -19,7 +19,7 @@ namespace CommandLineApi.Controllers
         
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetCommandById(string id)
+        public async Task<ActionResult> GetCommandById(string id)
         {
             try
             {
@@ -44,8 +44,34 @@ namespace CommandLineApi.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllCommandAsync()
+        [HttpGet("name")]
+        public async Task<ActionResult> GetCommandByName(string name)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var res = await _commandService.GetCommandByNameAsync(name);
+                if (res == null)
+                {
+                    return NotFound();
+                }
+                return Ok(res);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured we are working on it");
+            }
+        }
+
+        [HttpGet("commands")]
+        public async Task<ActionResult> GetAllCommandAsync()
         {
             try
             {

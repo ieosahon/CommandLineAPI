@@ -50,7 +50,7 @@ namespace CommandLineApi.Core.Services.Implementations
             var response = _mapper.Map<CommandResponseDto>(command);
             return new Response<CommandResponseDto>
             {
-                Data = response,
+                Data = response
                
 
             };
