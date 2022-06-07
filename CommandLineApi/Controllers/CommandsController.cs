@@ -19,7 +19,7 @@ namespace CommandLineApi.Controllers
         
 
         [HttpGet("id")]
-        public async Task<ActionResult> GetCommandById(string id)
+        public async Task<IActionResult> GetCommandById(string id)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace CommandLineApi.Controllers
         }
 
         [HttpGet("name")]
-        public async Task<ActionResult> GetCommandByName(string name)
+        public async Task<IActionResult> GetCommandByName(string name)
         {
             try
             {
@@ -70,8 +70,8 @@ namespace CommandLineApi.Controllers
             }
         }
 
-        [HttpGet("commands")]
-        public async Task<ActionResult> GetAllCommandAsync()
+        [HttpGet]
+        public async Task<IActionResult> GetAllCommandAsync()
         {
             try
             {

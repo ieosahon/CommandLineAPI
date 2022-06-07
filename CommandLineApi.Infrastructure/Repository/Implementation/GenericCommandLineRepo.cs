@@ -20,6 +20,17 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
             _dbSet = _commandLineDbContext.Set<T>();
         }
 
+        public async Task<bool> AddCommand(T command)
+        {
+            await _dbSet.AddAsync(command);
+            return await SaveAsync();
+        }
+
+        public Task<bool> DeleteCommand(T command)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<T>> GetAllCommand()
         {
             return await _dbSet.ToListAsync();
@@ -33,6 +44,11 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
         public async Task<T> GetCommandByName(string Name)
         {
             return await _dbSet.FindAsync(Name);
+        }
+
+        private async Task<bool> SaveAsync()
+        {
+            return await _commandLineDbContext.SaveChangesAsync() > 0;
         }
     }
 }

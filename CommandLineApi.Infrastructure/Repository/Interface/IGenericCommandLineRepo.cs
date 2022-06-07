@@ -13,5 +13,10 @@ namespace CommandLineApi.Infrastructure.Repository.Interface
         Task<T> GetCommandByName(string Name);
 
         Task<IEnumerable<T>> GetAllCommand();
+
+        Task<bool> AddCommand(T command);
+
+        Task<bool> DeleteCommand(T command);
+
     }
 }

@@ -7,6 +7,7 @@ using CommandLineApi.Infrastructure.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,10 @@ namespace CommandLineApi.Core.Services.Implementations
                 var response = _mapper.Map<IEnumerable<CommandResponseDto>>(commands);
                 return new Response<IEnumerable<CommandResponseDto>>
                 {
-                    Data = response
+                    Data = response,
+                    IsSuccess = true,
+                    Message = "List of commands",
+                    ResponseCode = HttpStatusCode.OK
                 };
             }
             return new Response<IEnumerable<CommandResponseDto>>();
@@ -50,8 +54,10 @@ namespace CommandLineApi.Core.Services.Implementations
             var response = _mapper.Map<CommandResponseDto>(command);
             return new Response<CommandResponseDto>
             {
-                Data = response
-               
+                Data = response,
+                IsSuccess = true,
+                Message = "command",
+                ResponseCode = HttpStatusCode.OK
 
             };
 
@@ -67,7 +73,10 @@ namespace CommandLineApi.Core.Services.Implementations
             var response = _mapper.Map<CommandResponseDto>(command);
             return new Response<CommandResponseDto>
             {
-                Data = response              
+                Data = response ,
+                IsSuccess = true,
+                Message = "command",
+                ResponseCode = HttpStatusCode.OK
             };
         }
     }

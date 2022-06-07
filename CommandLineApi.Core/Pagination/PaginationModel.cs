@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommandLineApi.Core.Utilities
+namespace CommandLineApi.Core.Pagination
 {
-    public class SearchResponse<T>
+    public class PaginationModel<T>
     {
         public T PageItems { get; set; }
         public int PageSize { get; set; }
