@@ -24,6 +24,20 @@ namespace CommandLineApi.Core.Services.Implementations
             _genericCommandLineRepo = genericCommandLineRepo;
             _mapper = mapper;
         }
+
+        public async Task<Response<string>> AddCommand(CommandRequestDto commandReq)
+        {
+            try
+            {   
+                var command = await _genericCommandLineRepo.AddCommand(command);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<Response<IEnumerable<CommandResponseDto>>> GetAllCommandAsync()
         {
             var commands = await _genericCommandLineRepo.GetAllCommand();

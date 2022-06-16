@@ -13,7 +13,8 @@ namespace CommandLineApi.Core.Profiles
     {
         public CommandLineProfile()
         {
-            CreateMap<Command, CommandResponseDto>();
+            CreateMap<Command, CommandResponseDto>().ReverseMap();
+            CreateMap<Command, CommandRequestDto>().ReverseMap();
         }
     }
 }
