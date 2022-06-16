@@ -6,10 +6,9 @@ using CommandLineApi.Infrastructure.Models;
 using CommandLineApi.Infrastructure.Repository.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CommandLineApi.Core.Services.Implementations
 {
@@ -27,17 +26,28 @@ namespace CommandLineApi.Core.Services.Implementations
 
         public async Task<Response<string>> AddCommand(CommandRequestDto commandReq)
         {
-            try
-            {   
-                var command = await _genericCommandLineRepo.AddCommand(command);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            
+                var newCommand = _mapper.Map<Command>(commandReq);
+                var command = await _genericCommandLineRepo.AddCommand(newCommand);
+                if (command)
+                {
+                    return new Response<string>
+                    {
+                        //Data = command.Id,
+                        IsSuccess = true,
+                        Message = "Command added successfully",
+                        ResponseCode = HttpStatusCode.OK
+                    };
+                }
+                return new Response<string>
+                {
+                    IsSuccess = false,
+                    Message = "Command not added",
+                    ResponseCode = HttpStatusCode.BadRequest
+                };
+            
+           
         }
-
         public async Task<Response<IEnumerable<CommandResponseDto>>> GetAllCommandAsync()
         {
             var commands = await _genericCommandLineRepo.GetAllCommand();
