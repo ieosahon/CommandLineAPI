@@ -13,5 +13,7 @@ namespace CommandLineApi.Core.Services.Interfaces
         Task<Response<CommandResponseDto>> GetCommandByIdAsync(string commandId);
         Task<Response<CommandResponseDto>> GetCommandByNameAsync(string commandName);
         Task<Response<IEnumerable<CommandResponseDto>>> GetAllCommandAsync();
+
+        Task<Response<string>> AddCommand(CommandRequestDto commandReq);
     }
 }

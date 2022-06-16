@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
+using CommandLineApi.Core.DTO;
 
 namespace CommandLineApi.Controllers
 {
@@ -85,6 +86,29 @@ namespace CommandLineApi.Controllers
                     return NotFound();
                 }
                 return Ok(res);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured we are working on it");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCommand(CommandRequestDto commandRequest)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var res = await _commandService.AddCommand(commandRequest);
+                    return Ok(res);
+                }
+                
+                return BadRequest(ModelState);
             }
             catch (ArgumentException ex)
             {
