@@ -9,14 +9,14 @@ namespace CommandLineApi.Infrastructure.Repository.Interface
 {
     public interface IGenericCommandLineRepo<T> where T : class
     {
-        Task<T> GetCommandById(string Id);
+        Task<T> GetCommandById(Command Id);
         Task<T> GetCommandByName(string Name);
 
         Task<IEnumerable<T>> GetAllCommand();
 
         Task<bool> AddCommand(T command);
-
-        Task<bool> DeleteCommand(T command);
+        
+        Task<bool> DeleteCommand(Command Id);
 
     }
 }

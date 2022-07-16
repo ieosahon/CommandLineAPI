@@ -26,9 +26,15 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
             return await SaveAsync();
         }
 
-        public Task<bool> DeleteCommand(T command)
+      /*  public async Task<bool> DeleteCommand(T Id)
         {
-            throw new NotImplementedException();
+           
+        }*/
+
+        public async Task<bool> DeleteCommand(Command Id)
+        {
+            var comm = await DeleteCommand(Id);
+            return comm;
         }
 
         public async Task<IEnumerable<T>> GetAllCommand()
@@ -36,7 +42,7 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetCommandById(string Id)
+        public async Task<T> GetCommandById(Command Id)
         {
             return await _dbSet.FindAsync(Id);
         }

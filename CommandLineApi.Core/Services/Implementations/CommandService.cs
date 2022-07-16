@@ -17,23 +17,25 @@ namespace CommandLineApi.Core.Services.Implementations
     {
         private readonly IGenericCommandLineRepo<Command> _genericCommandLineRepo;
         private readonly IMapper _mapper;
+        private readonly ICommandLineRepository _commandLineRepository;
 
-        public CommandService(IGenericCommandLineRepo<Command> genericCommandLineRepo, IMapper mapper)
+        public CommandService(IGenericCommandLineRepo<Command> genericCommandLineRepo, IMapper mapper, ICommandLineRepository commandLineRepository)
         {
             _genericCommandLineRepo = genericCommandLineRepo;
             _mapper = mapper;
+            _commandLineRepository = commandLineRepository;
         }
+       
 
         public async Task<Response<string>> AddCommand(CommandRequestDto commandReq)
         {
             
                 var newCommand = _mapper.Map<Command>(commandReq);
-                var command = await _genericCommandLineRepo.AddCommand(newCommand);
+                var command = await _commandLineRepository.AddCommandAsync(newCommand);
                 if (command)
                 {
                     return new Response<string>
                     {
-                        //Data = command.Id,
                         IsSuccess = true,
                         Message = "Command added successfully",
                         ResponseCode = HttpStatusCode.OK
@@ -48,6 +50,38 @@ namespace CommandLineApi.Core.Services.Implementations
             
            
         }
+
+        public async Task<Response<string>> DeleteCommand(Command commandId)
+        {
+            var command = await _genericCommandLineRepo.GetCommandById(commandId);
+            if (command == null)
+            {
+                return new Response<string>
+                {
+                    IsSuccess = false,
+                    Message = "Command not found",
+                    ResponseCode = HttpStatusCode.BadRequest
+                };
+            }
+
+            var commandDeleted = await _genericCommandLineRepo.DeleteCommand(command);
+            if (commandDeleted)
+            {
+                return new Response<string>
+                {
+                    IsSuccess = true,
+                    Message = "Command deleted successfully",
+                    ResponseCode = HttpStatusCode.OK
+                };
+            }
+            return new Response<string>
+            {
+                IsSuccess = false,
+                Message = "Command not deleted",
+                ResponseCode = HttpStatusCode.BadRequest
+            };
+        }
+
         public async Task<Response<IEnumerable<CommandResponseDto>>> GetAllCommandAsync()
         {
             var commands = await _genericCommandLineRepo.GetAllCommand();
@@ -68,7 +102,7 @@ namespace CommandLineApi.Core.Services.Implementations
 
         }
 
-        public async Task<Response<CommandResponseDto>> GetCommandByIdAsync(string commandId)
+        public async Task<Response<CommandResponseDto>> GetCommandByIdAsync(Command commandId)
         {
             var command = await _genericCommandLineRepo.GetCommandById(commandId);
             if (command == null)
