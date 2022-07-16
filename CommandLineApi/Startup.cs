@@ -46,6 +46,8 @@ namespace CommandLineApi
 
             services.AddScoped(typeof(IGenericCommandLineRepo<>), typeof(GenericCommandLineRepo<>));
 
+            services.AddScoped<ICommandLineRepository, CommandLineRepository>();
+
             services.AddAutoMapper(typeof(CommandLineProfile));
             /* services.AddSwaggerGen(c =>
              {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using CommandLineApi.Core.DTO;
+using CommandLineApi.Infrastructure.Models;
 
 namespace CommandLineApi.Controllers
 {
@@ -20,7 +21,7 @@ namespace CommandLineApi.Controllers
         
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetCommandById(string id)
+        public async Task<IActionResult> GetCommandById(Command id)
         {
             try
             {
@@ -102,13 +103,34 @@ namespace CommandLineApi.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var res = await _commandService.AddCommand(commandRequest);
-                    return Ok(res);
-                }
                 
-                return BadRequest(ModelState);
+                var res = await _commandService.AddCommand(commandRequest);
+                if (res == null)
+                {
+                    return NotFound();
+                }
+                return Ok(res);  
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured we are working on it");
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCommand(Command id)
+        {
+            try
+            {
+                var res = await _commandService.DeleteCommand(id);
+                if (res == null)
+                {
+                    return NotFound();
+                }
+                return Ok(res);
             }
             catch (ArgumentException ex)
             {

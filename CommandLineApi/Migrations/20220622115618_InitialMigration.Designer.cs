@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CommandLineApi.Migrations
 {
     [DbContext(typeof(CommandLineDbContext))]
-    [Migration("20220522053552_InitialDB")]
-    partial class InitialDB
+    [Migration("20220622115618_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
