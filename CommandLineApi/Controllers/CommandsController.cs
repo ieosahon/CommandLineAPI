@@ -21,14 +21,11 @@ namespace CommandLineApi.Controllers
         
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetCommandById(Command id)
+        public async Task<ActionResult<CommandResponseDto>> GetCommandById(string id)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+                
                 var res = await _commandService.GetCommandByIdAsync(id);
                 if (res == null)
                 {
@@ -121,7 +118,7 @@ namespace CommandLineApi.Controllers
             }
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteCommand(Command id)
+        public async Task<IActionResult> DeleteCommand(string id)
         {
             try
             {
