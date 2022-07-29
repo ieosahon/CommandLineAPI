@@ -42,7 +42,7 @@ namespace CommandLineApi.Infrastructure.Repository.Implementation
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetCommandById(Command Id)
+        public async Task<T> GetCommandById(string Id)
         {
             return await _dbSet.FindAsync(Id);
         }

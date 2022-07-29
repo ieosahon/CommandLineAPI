@@ -9,7 +9,8 @@ namespace CommandLineApi.Infrastructure.Repository.Interface
 {
     public interface ICommandLineRepository 
     {
-        Task<bool> AddCommandAsync(Command command);
-        Task<bool> DeleteCommandAsync(Command Id);
+        Task AddCommandAsync(Command command);
+        Task<bool> DeleteCommandAsync(string Id);
+        Task<IEnumerable<Command>> GetCommandByNameAsync(string Name);
     }
 }

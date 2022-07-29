@@ -9,7 +9,7 @@ namespace CommandLineApi.Infrastructure.Repository.Interface
 {
     public interface IGenericCommandLineRepo<T> where T : class
     {
-        Task<T> GetCommandById(Command Id);
+        Task<T> GetCommandById(string Id);
         Task<T> GetCommandByName(string Name);
 
         Task<IEnumerable<T>> GetAllCommand();

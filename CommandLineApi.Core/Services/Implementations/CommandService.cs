@@ -18,6 +18,7 @@ namespace CommandLineApi.Core.Services.Implementations
         private readonly IGenericCommandLineRepo<Command> _genericCommandLineRepo;
         private readonly IMapper _mapper;
         private readonly ICommandLineRepository _commandLineRepository;
+        
 
         public CommandService(IGenericCommandLineRepo<Command> genericCommandLineRepo, IMapper mapper, ICommandLineRepository commandLineRepository)
         {
@@ -31,8 +32,9 @@ namespace CommandLineApi.Core.Services.Implementations
         {
             
                 var newCommand = _mapper.Map<Command>(commandReq);
-                var command = await _commandLineRepository.AddCommandAsync(newCommand);
-                if (command)
+            //var command = await _commandLineRepository.AddCommandAsync(newCommand);
+            var command = _commandLineRepository.AddCommandAsync(newCommand).ToString();
+            if (command == null)
                 {
                     return new Response<string>
                     {
@@ -51,7 +53,7 @@ namespace CommandLineApi.Core.Services.Implementations
            
         }
 
-        public async Task<Response<string>> DeleteCommand(Command commandId)
+        public async Task<Response<string>> DeleteCommand(string commandId)
         {
             var command = await _genericCommandLineRepo.GetCommandById(commandId);
             if (command == null)
@@ -102,7 +104,7 @@ namespace CommandLineApi.Core.Services.Implementations
 
         }
 
-        public async Task<Response<CommandResponseDto>> GetCommandByIdAsync(Command commandId)
+        public async Task<Response<CommandResponseDto>> GetCommandByIdAsync(string commandId)
         {
             var command = await _genericCommandLineRepo.GetCommandById(commandId);
             if (command == null)
@@ -123,7 +125,8 @@ namespace CommandLineApi.Core.Services.Implementations
 
         public async Task<Response<CommandResponseDto>> GetCommandByNameAsync(string commandName)
         {
-            var command = await _genericCommandLineRepo.GetCommandByName(commandName);
+            //var command = await _genericCommandLineRepo.GetCommandByName(commandName);
+            var command = await _commandLineRepository.GetCommandByNameAsync(commandName);
             if (command == null)
             {
                 throw new ArgumentException($"Command with {commandName} is not found");
